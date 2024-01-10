@@ -1,6 +1,7 @@
 import processing.sound.*;
 String plocaImg = "bat1.gif", loptaImg = "ball1.gif", cigla1Img = "stone01.gif", cigla2Img = "stone02.gif", cigla3Img = "stone03.gif", cigla4Img = "stone05.gif",
-                              cigla5Img = "stone16.gif", cigla6Img = "stone17.gif", zivotImg = "heart.png", plusImg = "plus.png", minusImg = "minus.png";
+                              cigla5Img = "stone16.gif", cigla6Img = "stone17.gif", zivotImg = "heart.png", plusImg = "plus.png", minusImg = "minus.png",
+                              bombImg = "bomb.png";
 
 color pozadina = color(50, 50, 50);
 static int gameSirina = 600, gameVisina = 400;
@@ -49,7 +50,7 @@ void setup() {
     brojCigli++;
     brojacCikCakCigli++;
     //hardkodirani powerup-ovi
-    if(brojacCikCakCigli == 8){
+    if(brojacCikCakCigli == 8 || brojacCikCakCigli == 12){
         brick6.sadrziPowerUp = "zivot";
     }
     else if (brojacCikCakCigli == 3 || brojacCikCakCigli == 4){
@@ -57,6 +58,9 @@ void setup() {
     }
     else if (brojacCikCakCigli == 5 || brojacCikCakCigli == 7 || brojacCikCakCigli == 15){
         brick6.sadrziPowerUp = "smanjenje";
+    }
+    else if(brojacCikCakCigli == 2 || brojacCikCakCigli == 6 || brojacCikCakCigli == 10 || brojacCikCakCigli == 9 || brojacCikCakCigli == 16){
+        brick6.sadrziPowerUp = "bomba";
     }
   }
       //šarene cigle
@@ -78,6 +82,9 @@ void setup() {
     }
     else if (brojacSarenihCigli == 4 || brojacSarenihCigli == 16 || brojacSarenihCigli == 17){
         brick5.sadrziPowerUp = "smanjenje";
+    }
+    else if (brojacSarenihCigli == 3 || brojacSarenihCigli == 8 || brojacSarenihCigli == 12 || brojacSarenihCigli == 6 || brojacSarenihCigli == 10){
+        brick5.sadrziPowerUp = "bomba";
     }
   }
     //žute cigle
@@ -110,6 +117,9 @@ void setup() {
     else if (brojacZelenihCigli == 6 || brojacZelenihCigli == 10 || brojacZelenihCigli == 11){
         brick3.sadrziPowerUp = "smanjenje";
     }
+    else if (brojacZelenihCigli == 1 || brojacZelenihCigli == 4 || brojacZelenihCigli == 13 || brojacZelenihCigli == 9 || brojacZelenihCigli == 14){
+        brick3.sadrziPowerUp = "bomba";
+    }
   }
   
   //plave cigle
@@ -132,6 +142,9 @@ void setup() {
     else if (brojacPlavihCigli == 2 || brojacPlavihCigli == 9 || brojacPlavihCigli == 11){
         brick1.sadrziPowerUp = "smanjenje";
     }
+    else if (brojacPlavihCigli == 5 || brojacPlavihCigli == 14 || brojacPlavihCigli == 15 || brojacPlavihCigli == 1 || brojacPlavihCigli == 6){
+        brick1.sadrziPowerUp = "smanjenje";
+    }
   }
   //crvene cigle
   int brojacCrvenihCigli = 0;
@@ -152,6 +165,9 @@ void setup() {
     }
     else if (brojacCrvenihCigli == 5 || brojacCrvenihCigli == 14){
         brick2.sadrziPowerUp = "smanjenje";
+    }
+    else if (brojacCrvenihCigli == 4 || brojacCrvenihCigli == 10 || brojacCrvenihCigli == 12){
+        brick2.sadrziPowerUp = "bomba";
     }
   }
   
@@ -176,7 +192,7 @@ void draw() {
   azurirajObjekte();
   nacrtajObjekte();
   provjeriGubitakZivota();
-  ispisiRezultatZivoti(); //<>//
+  ispisiRezultatZivoti();
   
   if (pitaPitanje == true) {
     ispisiPitanje();
@@ -253,8 +269,10 @@ void ispisiRezultatZivoti(){
 }
 
 void provjeriGubitakZivota(){
-    if(lopta.y > gameVisina)
+    
+    if(lopta.y > gameVisina || plocaSkupilaBombu == true)
     {
+        plocaSkupilaBombu = false;
         lopta.x = 300 - 8;
         lopta.y = 200 - 8;
         lopta.brzina = 0;
@@ -312,6 +330,7 @@ static int pitanjeX=gameSirina/2-80, pitanjeY=gameVisina/2-40, pitanjeSirina=160
 final static int NEMA_ODGOVORA = 0;
 final static int DA = 1;
 final static int NE = 2;
+static boolean plocaSkupilaBombu = false;
 
 int provjeriOdgovor() { //provjerava je li korisnik pritisnuo Da ili Ne
   if (mouseX >= pitanjeX && mouseX <= pitanjeX+pitanjeSirina/2 && mouseY >= pitanjeY+pitanjeVisina/2 && mouseY <= pitanjeY+pitanjeVisina && pitaPitanje == true) {
@@ -496,17 +515,21 @@ void izbaciPowerUp(GameObject razbijeniBrick){
         GameObject zivotPowerUp = new GameObject(razbijeniBrick.x+8, razbijeniBrick.y, zivotImg);
         zivotPowerUp.klasaOznaka = "powerUp";
         zivotPowerUp.idOznaka = "zivot";
-        //zivotPowerUp.pomak(0,270);
     }
     else if (razbijeniBrick.sadrziPowerUp == "povecanje"){
-        GameObject zivotPowerUp = new GameObject(razbijeniBrick.x+8, razbijeniBrick.y, plusImg);
-        zivotPowerUp.klasaOznaka = "powerUp";
-        zivotPowerUp.idOznaka = "povecanje";
+        GameObject povecanjePowerUp = new GameObject(razbijeniBrick.x+8, razbijeniBrick.y, plusImg);
+        povecanjePowerUp.klasaOznaka = "powerUp";
+        povecanjePowerUp.idOznaka = "povecanje";
     }
     else if (razbijeniBrick.sadrziPowerUp == "smanjenje"){
-        GameObject zivotPowerUp = new GameObject(razbijeniBrick.x+8, razbijeniBrick.y, minusImg);
-        zivotPowerUp.klasaOznaka = "powerUp";
-        zivotPowerUp.idOznaka = "smanjenje";
+        GameObject smanjenjePowerUp = new GameObject(razbijeniBrick.x+8, razbijeniBrick.y, minusImg);
+        smanjenjePowerUp.klasaOznaka = "powerUp";
+        smanjenjePowerUp.idOznaka = "smanjenje";
+    }
+    else if(razbijeniBrick.sadrziPowerUp == "bomba"){
+        GameObject bombaPowerUp = new GameObject(razbijeniBrick.x+8, razbijeniBrick.y, bombImg);
+        bombaPowerUp.klasaOznaka = "powerUp";
+        bombaPowerUp.idOznaka = "bomba";
     }
     
 }
@@ -520,6 +543,9 @@ void obradiPowerUpSkupljen(GameObject powerUp){
     }
     else if(powerUp.idOznaka == "smanjenje"){
         ploca.promijeniSirinuIkone(false);
+    }
+    else if(powerUp.idOznaka == "bomba"){
+        plocaSkupilaBombu = true;
     }
     powerUp.unisti();
    
