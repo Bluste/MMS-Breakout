@@ -15,6 +15,9 @@ Potom sam odlučio učiniti igru zanimljivijom tako da uvedem PowerUp-ove koji i
 - Dodan sustav za obradu PowerUp-ova
 - Dodani PowerUpOvi za dobivanje života, povećanje i smanjenje ploče
 - Nacrtane ikone za povećanje i smanjivanje ploče
+- Nacrtane ikone za povećanje i smanjivanje ploče i ikone za bombe
+- Implementirane bombe kao negativni PowerUp-ovi
+
 
 Daljnja poboljšanja:
 
@@ -23,3 +26,4 @@ Daljnja poboljšanja:
 - Zvučni efekti za PowerUp-ove
 - Pozadinska glazba u igrici
 - Napraviti hijerarhiju klasa i podijeliti kod u više datoteka
+- Animacije i poruke igraču pri skupljanju PowerUpOva
