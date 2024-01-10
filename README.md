@@ -12,13 +12,14 @@ Igra je igriva, ali joj nedostaje dinamike. Kod samog testiranja sam uvidio neke
 
 Potom sam odlučio učiniti igru zanimljivijom tako da uvedem PowerUp-ove koji ispadaju prilikom razbijanja određenih brick-ova:
 
--Dodan sustav za obradu PowerUp-ova
--Dodani PowerUpOvi za dobivanje života, povećanje i smanjenje ploče
--Nacrtane ikone za povećanje i smanjivanje ploče
+- Dodan sustav za obradu PowerUp-ova
+- Dodani PowerUpOvi za dobivanje života, povećanje i smanjenje ploče
+- Nacrtane ikone za povećanje i smanjivanje ploče
 
 Daljnja poboljšanja:
--Randomizacija PowerUp-ova, za sada su hardkodirani u određene brick-ove
--Dodati dodatne levele
--Zvučni efekti za PowerUp-ove
--Pozadinska glazba u igrici
--Napraviti hijerarhiju klasa i podijeliti kod u više datoteka
+
+- Randomizacija PowerUp-ova, za sada su hardkodirani u određene brick-ove
+- Dodati dodatne levele
+- Zvučni efekti za PowerUp-ove
+- Pozadinska glazba u igrici
+- Napraviti hijerarhiju klasa i podijeliti kod u više datoteka
