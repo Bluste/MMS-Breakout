@@ -77,7 +77,7 @@ void setup() {
     if(brojacSarenihCigli == 13){
         brick5.sadrziPowerUp = "zivot";
     }
-    else if (brojacSarenihCigli == 2 || brojacSarenihCigli == 7){
+    else if (brojacSarenihCigli == 11 || brojacSarenihCigli == 7){
         brick5.sadrziPowerUp = "povecanje";
     }
     else if (brojacSarenihCigli == 4 || brojacSarenihCigli == 16 || brojacSarenihCigli == 17){
@@ -160,7 +160,7 @@ void setup() {
     if(brojacCrvenihCigli == 4){
         brick2.sadrziPowerUp = "zivot";
     }
-    else if (brojacCrvenihCigli == 2 || brojacCrvenihCigli == 8){
+    else if (brojacCrvenihCigli == 8){
         brick2.sadrziPowerUp = "povecanje";
     }
     else if (brojacCrvenihCigli == 5 || brojacCrvenihCigli == 14){
@@ -207,10 +207,10 @@ void keyPressed() {
     {
       //kada se pritisne tipka, ploca se pocne kretati u lijevo/desno "brzinom" 3
       if(keyCode == LEFT)
-        ploca.pomak(5,180);
+        ploca.pomak(3,180);
 
       else if(keyCode == RIGHT)
-        ploca.pomak(5, 0);
+        ploca.pomak(3, 0);
     }
     
     if(key == ' ')
